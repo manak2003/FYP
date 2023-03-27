@@ -39,7 +39,7 @@ class RegisterForm(forms.Form):
             raise forms.ValidationError("Email already exists")
         return email
     
-class ForgotpwdForm(forms.Form):
+class ForgetPasswordForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
 

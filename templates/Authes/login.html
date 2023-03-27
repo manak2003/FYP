@@ -3,28 +3,19 @@
 {% load static %}
 {% block content %}
 
-<div class="container pt-5">
-    <div class="row justify-content-center align-items-center 100h pt-5">
-        <div class="col-lg-8 ">
-            <div class="card mb-3 border-0 rounded-3 shadow-lg mt-5">
-                <div class="row g-0">
-                    <div class="col-md-4 rounded-start mx-auto d-flex align-items-center">
-                        <img src="{% static 'images/hero2.png' %}" class="img-fluid mx-auto hero" alt="login form">
-                    </div>
-                    <div class="col-md-8 py-5">
-                        <div class="card-body">
-                            <h3>Sign In to Blogist 🥷</h3>
-                            <form method="POST">
-                                {% csrf_token %}
-                                {% bootstrap_form form %}
-                                {% bootstrap_button "Sign In" type="submit" %}
-                                <a href="{% url 'register' %}" class="nav-link">Dont have an account, Register Free!</a>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+<div class="card">
+    <div class="card-body">
+        <h3>Login</h3>
+        <form method="POST">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% bootstrap_button "Log In" type="submit" %}
+            <a name="" id="" class="btn btn-primary" href="{% url 'social:begin' 'github' %}" role="button">Login with Github <i class="fa-brands fa-github"></i></a><br><br>
+
+            <a href="{% url 'register' %}" class="nav-link">Don't have an account, Register Free!</a>
+            <a href="{% url 'forget_password' %}" class="nav-link">Forget password?</a>
+        </form>
     </div>
 </div>
 
@@ -43,6 +34,11 @@
     .card:hover {
         background-color: rgb(244, 241, 239);
     }
+    .card{
+        height: 45vh;
+        margin-left: 25%;
+        width: 35%;;
+      }
 </style>
 {% endblock %}
 {% block js %}

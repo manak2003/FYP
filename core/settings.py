@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'members',
     'store',
     'django_bootstrap5',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -54,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',         #added
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -69,6 +71,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends' #added
             ],
         },
     },
@@ -130,3 +133,26 @@ MEDIA_ROOT = BASE_DIR.joinpath('media')
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#social app custom settings
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.github.GithubOAuth2',  
+    'django.contrib.auth.backends.ModelBackend', 
+    
+]
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL ='login'
+
+SOCIAL_AUTH_GITHUB_KEY = '8db41eaee9a50e3ad86b'
+SOCIAL_AUTH_GITHUB_SECRET = 'd6336963c69044963932f34e5e67df2cbc4564ec'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+
+
+
