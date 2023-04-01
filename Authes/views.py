@@ -74,17 +74,18 @@ def ForgetPassword(request):
             if not User.objects.filter(username=username).first():
                 messages.success(request, 'No user found with this username.')
                 return redirect("login")
-            print('i m here')
             user_obj = User.objects.get(username=username)
-            token = str(uuid.uuid4())
-            profile_obj = Profile.objects.get(user = user_obj)
-            profile_obj.forget_password_token = token 
-            profile_obj.save()
-            print(user_obj, user_obj.email, token)
-            send_forget_password_mail(user_obj.email , token )
-            messages.success(request, 'An email is sent.')
-            return redirect("login")
-            
+            if user_obj:
+                token = str(uuid.uuid4())
+                profile_obj = Profile.objects.get(user = user_obj)
+                profile_obj.forget_password_token = token 
+                profile_obj.save()
+                print(user_obj, user_obj.email, token)
+                send_forget_password_mail(user_obj.email , token )
+                messages.success(request, 'An email is sent.')
+                return redirect("login")
+            else:
+                messages.error(request, 'No user found with this username.')
     except Exception as e:
         print(e)
     return render(request,'Authes/forget_password.html')
@@ -120,4 +121,4 @@ def ChangePassword(request, token ):
         
     except Exception as e:
         print(e)
-    return render(request, 'change_password.htmml', context)
+    return render(request, 'Authes/change_password.html', context)

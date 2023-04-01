@@ -207,13 +207,15 @@
         <nav id="navbar">
             <div class="container">
                 <a href="/" class="brand">Navbar</a>
+                
                 <div class="container-inner">
                     <ul>
                         <li><a href="/">Home</a></li>
-                        <li><a href="#">Events</a></li>
+                        <li><a href="{% url 'events' %}">Events</a></li>
                         <li><a href="#">Finances</a></li>
-                        <li><a href="#">Store</a></li>
+                        <li><a href="{% url 'store' %}">Store</a></li>
                         <li><a href="#">Membership</a></li>
+                        <li><a href="{% url 'admin:index' %}">Admin</a></li>
 
                         {% if user.is_authenticated %}
                         

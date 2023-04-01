@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,6 +46,9 @@ INSTALLED_APPS = [
     'store',
     'django_bootstrap5',
     'social_django',
+    'tinymce',
+    
+    
 ]
 
 MIDDLEWARE = [
@@ -138,7 +142,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTHENTICATION_BACKENDS = [
     'social_core.backends.github.GithubOAuth2',  
     'django.contrib.auth.backends.ModelBackend', 
-    
 ]
 
 LOGIN_URL = 'login'
@@ -150,9 +153,20 @@ SOCIAL_AUTH_GITHUB_KEY = '8db41eaee9a50e3ad86b'
 SOCIAL_AUTH_GITHUB_SECRET = 'd6336963c69044963932f34e5e67df2cbc4564ec'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
+EMAIL_HOST = 'mail.digipodium.com'
+EMAIL_USE_TLS = False
 EMAIL_PORT = 587
+EMAIL_HOST_USER = 'manaksrivastava4734@digipodium.com'
+EMAIL_HOST_PASSWORD = "digipodium47342k22"
+
+
+CURRENCY = '€'
+
+TINYMCE_DEFAULT_CONFIG = {
+    "plugins": "advlist,autolink,lists,link,image,charmap,print,preview,anchor,"
+    "searchreplace,visualblocks,code,fu llscreen,insertdatetime,media,table,paste,"
+    "code,help,wordcount",
+}
 
 
 

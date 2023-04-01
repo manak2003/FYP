@@ -10,7 +10,7 @@ urlpatterns = [
     path('register/',register_view, name ='register'),
     path('home/',home_view, name ='home'),
     path('forget_password/', views.ForgetPassword, name ='forget_password'),
-    path('change_password/', views.ChangePassword, name ='change_password'),
+    path('change_password/<str:token>/', views.ChangePassword, name ='change_password'),
     
    
     

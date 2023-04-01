@@ -23,9 +23,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('landing.urls')),
     path('Authes/', include('Authes.urls')),
+    path('store/', include('store.urls')),
+    path('events/', include('events.urls')),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('login/', views.login_view, name='login'),
     path('social-auth/', include('social_django.urls', namespace='social')),
+    path('tinymce/', include('tinymce.urls')),
  
     
     
