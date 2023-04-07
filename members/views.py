@@ -23,5 +23,3 @@ class MembershipSelectView(ListView):
         context['current_user_membership'] = str(current_user_membership.membership)
         context['current_user_subscription'] = str(current_user_subscription.active)
         return context
-
-

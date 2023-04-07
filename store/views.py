@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 def StorePage(request):
     return render(request,"store/store.html")
 
-def OrderPage(request):
+def add_order(request):
     form = OrderForm(request.POST or None)
     if form.is_valid():
         title = form.cleaned_data.get('title')
@@ -20,7 +20,7 @@ def OrderPage(request):
         discount = form.cleaned_data.get('discount')
         final_value = form.cleaned_data.get('final_value')
         is_paid = form.cleaned_data.get('is_paid')
-        
+    
         order = Order(title=title,value=value, discount=discount, final_value=final_value, is_paid=is_paid)
         order.save()
         
@@ -49,7 +49,7 @@ def ProductPage(request):
         'title':'OrderPage',
         'form': form
     }
-    return render(request,"store/order.html",ctx)
+    return render(request,"store/product.html",ctx)
 
 def OrderItemPage(request):
     form = OrderItemForm(request.POST or None)

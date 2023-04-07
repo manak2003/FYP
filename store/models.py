@@ -1,12 +1,10 @@
 from django.db import models
 from django.conf import settings
 from .managers import ProductManager, OrderManager
-from django.db.models import Sum
 from django.urls import reverse
 from django.dispatch import receiver
 from django.db.models.signals import post_delete
 import datetime
-from django.utils import timezone
 from decimal import Decimal 
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User

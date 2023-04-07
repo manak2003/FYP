@@ -13,7 +13,7 @@ class ImageForm(forms.ModelForm):
         fields = ('image','caption')
         
 class OrderForm(forms.Form):
-    title = forms.CharField(widget=TinyMCE(attrs={'cols':22,'rows':3},),)
+    title = forms.CharField(max_length=100)
     value = forms.DecimalField()
     discount = forms.DecimalField()
     final_value = forms.DecimalField()
@@ -23,9 +23,9 @@ class OrderForm(forms.Form):
         fields = ('title','value','discount','final_value','is_paid')
     
 class ProductForm(forms.Form):
-    title = forms.CharField(widget=forms.TextInput ,max_length=100)
-    short_description = forms.CharField(widget=forms.Textarea,max_length=150, help_text='Describe the product')
-    qty = forms.IntegerField()
+    title = forms.CharField(max_length=100)
+    short_description = forms.CharField(max_length=150, help_text='Describe the product')
+    quantity = forms.IntegerField()
     category = forms.ModelChoiceField(queryset=Category.objects.all(), empty_label='Select Category')
     value = forms.DecimalField()
     discount_value = forms.DecimalField()
@@ -34,7 +34,7 @@ class ProductForm(forms.Form):
     
     class Meta:
         model = Product
-        fields = ('title','short_description','category','qty','value','discount_value','final_value','status')
+        fields = ('title','short_description','category','quantity','value','discount_value','final_value','status')
         
 class OrderItemForm(forms.Form):
     product = forms.CharField(widget=forms.TextInput)
