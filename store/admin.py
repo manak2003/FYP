@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Product, Order, OrderItem,Image
+from .models import Category, Product, Order, OrderItem,Image,Delivery,Settings
 
 # Register your models here.
 
@@ -44,20 +44,20 @@ class ImageAdmin(admin.ModelAdmin):
     list_display = ('image','caption','created_at')
     list_filter = ('image',)
     
-# @admin.register(Delivery)
-# class DeliveryAdmin(admin.ModelAdmin):
-#     '''Admin View for Delivery'''
+@admin.register(Delivery)
+class DeliveryAdmin(admin.ModelAdmin):
+    '''Admin View for Delivery'''
     
-#     list_display = ('title','value','active','created_at','last_modified')
-#     list_filter = ('title','active')
+    list_display = ('title','value','active','created_at','last_modified')
+    list_filter = ('title','active')
  
         
-# @admin.register(Settings)
-# class SettingsAdmin(admin.ModelAdmin):
-#     '''Admin View for Settings'''
+@admin.register(Settings)
+class SettingsAdmin(admin.ModelAdmin):
+    '''Admin View for Settings'''
 
-#     list_display = ('title','logo','email','phone','address','created_at','last_modified')
-#     list_filter = ('title','email','phone','address')
-#     search_fields = ('title','email','phone','address')
+    list_display = ('title','logo','email','phone','address','created_at','last_modified')
+    list_filter = ('title','email','phone','address')
+    search_fields = ('title','email','phone','address')
     
     

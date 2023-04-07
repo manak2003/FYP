@@ -4,8 +4,6 @@ from .models import *
 from django.contrib import messages
 from django.conf import settings
 
-def landing(request):
-    ctx = {}
-    ctx['title'] = 'Welcome'
-    return render(request, 'landing/landing.html', ctx)
+def landing_page(request):
+    return render(request, 'landing/landing_page.html')
 

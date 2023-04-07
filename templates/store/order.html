@@ -1,4 +1,4 @@
-{% extends 'layout/base.html' %}
+{% extends 'store/store.html' %}
 {% load django_bootstrap5 %}
 {% load static %}
 
@@ -9,6 +9,7 @@
     {% bootstrap_button "Order" type="submit" %}
     <a name="" id="" class="btn btn-primary" href="{% url 'order' %}" role="button">
 </form>
+
 {% endblock content %}
     
 

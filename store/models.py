@@ -23,7 +23,7 @@ class Category(models.Model):
         return self.title
     
 class Order(models.Model):
-    date = models.DateField(default=datetime.datetime.now)
+    date = models.DateField(auto_now_add=True)
     title = models.CharField(blank=True, max_length=100)
     timestamp = models.DateField(auto_now_add=True)
     value = models.DecimalField(default=0.00, decimal_places=2, max_digits=10)
@@ -168,8 +168,8 @@ class Delivery(models.Model):
     title = models.CharField(max_length=100,default='Delivery')
     value = models.DecimalField(default=0.00, decimal_places=2, max_digits=10)
     active = models.BooleanField(default=True)
-    created_at = models.DateTimeField(default=True)
-    last_modified = models.DateTimeField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title
@@ -181,8 +181,8 @@ class Settings(models.Model):
     email = models.EmailField(default=True)
     address = models.CharField(max_length=100,default='Address')
     currency = models.CharField(max_length=100,default='Currency')
-    created_at = models.DateTimeField(default=True)
-    last_modified = models.DateTimeField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title

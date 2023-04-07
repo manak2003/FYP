@@ -1,0 +1,167 @@
+ {% extends 'layout/base.html' %}
+{% load static %}
+
+{% block content %}
+    
+
+    <!-- Header Section -->
+    <section class="header-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <h1 class="text-center mb-5">Membership Management System</h1>
+                    <p class="lead text-center">Join our organization and enjoy the benefits of membership</p>
+                    <a href="#" class="btn btn-primary btn-lg d-block mx-auto mt-4">Join Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <i class="fa fa-user-circle-o fa-3x mb-4"></i>
+                            <h4 class="card-title">Membership Registration</h4>
+                            <p class="card-text">Join our organization with just a few clicks.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <i class="fa fa-clock-o fa-3x mb-4"></i>
+                            <h4 class="card-title">Membership Renewal</h4>
+                            <p class="card-text">Never miss a renewal deadline again.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <i class="fa fa-credit-card fa-3x mb-4"></i>
+                            <h4 class="card-title">Automatic Payment Processing</h4>
+                            <p class="card-text">Enjoy seamless payment processing for your membership fees.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <h2 class="text-center mb-5">Join our organization today and enjoy the benefits of membership.</h2>
+                    <a href="#" class="btn btn-primary btn-lg d-block mx-auto mt-4">Join Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock content %}
+
+
+{% block css %}
+
+    <!-- /* Body Styles */ -->
+<style>
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #555;
+    background-color: #f8f9fa;
+}
+
+/* Header Section Styles */
+.header-section {
+    background-image: url('https://source.unsplash.com/random/1600x900');
+    background-size: cover;
+    background-position: center;
+    padding: 150px 0;
+}
+
+.header-section h1 {
+    color: #fff;
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.header-section p {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+/* Features Section Styles */
+.features-section {
+    background-color: #fff;
+}
+
+.features-section .card {
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.features-section .card i {
+    color: #007bff;
+}
+
+.features-section .card-title {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 15px;
+}
+
+.features-section .card-text {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+/* Call to Action Section Styles */
+.cta-section {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.cta-section h2 {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 30px;
+}
+
+.cta-section .btn-primary {
+    background-color: #fff;
+    border-color: #fff;
+    color: #007bff;
+}
+
+.cta-section .btn-primary:hover {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+}
+</style>
+{% endblock css %}
+
+
+{% block js %}
+    
+{% endblock js %}
+

@@ -1,0 +1,43 @@
+{% extends 'store/store.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+{% if cart %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Cart</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in cart %}
+          <tr>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.product.price }}</td>
+            <td>{{ item.product.price|multiply:item.quantity }}</td>
+            <td>
+              <form action="{% url 'remove_from_cart' item.product.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Remove</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div class="row">
+        <div class="col-md-12">
+          <h3>Total: {{ cart_total }}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
