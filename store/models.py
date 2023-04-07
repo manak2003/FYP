@@ -8,6 +8,8 @@ from django.db.models.signals import post_delete
 import datetime
 from django.utils import timezone
 from decimal import Decimal 
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -186,4 +188,14 @@ class Settings(models.Model):
 
     def __str__(self):
         return self.title
-  
+    
+
+class Cart(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    items = models.ManyToManyField('Product', through='CartItem')
+    total = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)

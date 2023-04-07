@@ -4,6 +4,8 @@ from .forms import *
 from django.contrib.auth.models import User 
 from django.contrib import messages
 from django.conf import settings
+from .models import *
+from django.contrib.auth.decorators import login_required
 # Create your views here. 
 
 
@@ -107,3 +109,40 @@ def SettingsPage(request):
         'form' : form
     }
     return render(request,"store/settings.html",ctx)
+
+@login_required
+def add_to_cart(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    cart, created = Cart.objects.get_or_create(user=request.user)
+    
+    cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
+
+    if not created:
+        cart_item.quantity += 1
+        cart_item.save()
+
+    cart.items.add(product)
+    cart.total += product.price
+    cart.save()
+
+    return redirect('cart')
+
+@login_required
+def remove_from_cart(request, cart_item_id):
+    cart_item = get_object_or_404(CartItem, id=cart_item_id)
+    cart = cart_item.cart
+    product = cart_item.product
+    cart_item.delete()
+    cart.items.remove(product)
+    cart.total -= product.price
+    cart.save()
+
+    return redirect('cart')
+
+@login_required
+def view_cart(request):
+    cart, created = Cart.objects.get_or_create(user=request.user)
+    cart_items = cart.cartitem_set.all()
+    context = {'cart_items': cart_items, 'total': cart.total}
+    return render(request, 'store/cart.html', context)
+    

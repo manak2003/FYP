@@ -1,43 +1,138 @@
 {% extends 'store/store.html' %}
-{% load static %}
-{% load bootstrap4 %}
+
 {% block content %}
-{% if cart %}
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <h1>Cart</h1>
-      <table class="table">
+    <h1>Shopping Cart</h1>
+    <table class="table">
         <thead>
-          <tr>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Total</th>
-            <th></th>
-          </tr>
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
         </thead>
         <tbody>
-          {% for item in cart %}
-          <tr>
-            <td>{{ item.product.name }}</td>
-            <td>{{ item.quantity }}</td>
-            <td>{{ item.product.price }}</td>
-            <td>{{ item.product.price|multiply:item.quantity }}</td>
-            <td>
-              <form action="{% url 'remove_from_cart' item.product.id %}" method="POST">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-danger">Remove</button>
-              </form>
-            </td>
-          </tr>
-          {% endfor %}
+            {% for cart_item in cart_items %}
+                <tr>
+                    <td>{{ cart_item.product.name }}</td>
+                    <td>{{ cart_item.quantity }}</td>
+                    <td>{{ cart_item.product.price }}</td>
+                    
+                    <td>
+                        <form action="{% url 'remove_from_cart' cart_item.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
         </tbody>
-      </table>
-      <div class="row">
-        <div class="col-md-12">
-          <h3>Total: {{ cart_total }}</h3>
-        </div>
-      </div>
-    </div>
-  </div>
+        <tfoot>
+            <tr>
+                <td colspan="3"></td>
+                <td>Total:</td>
+                <td>{{ total }}</td>
+            </tr>
+        </tfoot>
+    </table>
+{% endblock content %}
+
+
+{% block css %}
+<style>
+/* Cart table styles */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+.table th,
+.table td {
+  padding: 1rem;
+  border: 1px solid #dee2e6;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table th {
+  font-weight: bold;
+}
+
+/* Cart form styles */
+.cart-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.cart-form label {
+  margin-right: 1rem;
+}
+
+.cart-form input[type="number"] {
+  width: 6rem;
+  margin-right: 1rem;
+}
+
+.cart-form button[type="submit"] {
+  border: none;
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cart-form button[type="submit"]:hover {
+  background-color: #0062cc;
+}
+
+/* Cart table footer styles */
+.table tfoot td {
+  font-weight: bold;
+  text-align: right;
+  vertical-align: middle;
+  padding: 1rem;
+}
+
+/* Media queries for responsive design */
+@media screen and (max-width: 767px) {
+  .table th,
+  .table td {
+    padding: 0.75rem;
+  }
+  .cart-form {
+    flex-direction: column;
+  }
+  .cart-form input[type="number"] {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+  .cart-form button[type="submit"] {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .table th,
+  .table td {
+    padding: 1.5rem;
+  }
+  .cart-form input[type="number"] {
+    width: auto;
+  }
+  .cart-form button[type="submit"] {
+    width: auto;
+  }
+}
+</style>
+{% endblock css %}
+    
