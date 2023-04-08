@@ -11,8 +11,6 @@
           {% bootstrap_button "Submit" type="submit" %}
       </form>
     </div>
-  
-
 {% endblock content %}
     
 
@@ -88,48 +86,3 @@
 {% block js %}
     
 {% endblock js %}
-<!--         
-<div class="container">
-  <h2>Add Product</h2>
-  <form method="post">
-    {% csrf_token %}
-    <div class="form-group">
-      <label for="title">Title:</label>
-      <input type="text" class="form-control" id="title" name="title" required>
-    </div>
-    <div class="form-group">
-      <label for="short_description">Description:</label>
-      <input type="text" class="form-control" id="short_description" name="short_description" required>
-    </div>
-    <div class="form-group">
-      <label for="quantity">Quantity:</label>
-      <input type="number" class="form-control" id="quantity" name="quantity" min="1" required>
-    </div>
-    <div class="form-group">
-      <label for="category">Category:</label>
-      <input type="text" class="form-control" id="category" name="category" min="0" step="0.01" required>
-    </div>
-    <div class="form-group">
-      <label for="value">Value:</label>
-      <input type="number" class="form-control" id="value" name="value" min="0" step="0.01" required>
-    </div>
-    <div class="form-group">
-      <label for="discount_value">Discount Value:</label>
-      <input type="number" class="form-control" id="discount_value" name="discount_value" min="0" step="0.01" required>
-    </div>
-    <div class="form-group">
-      <label for="final_value">Final Value:</label>
-      <input type="number" class="form-control" id="final_value" name="final_value" min="0" step="0.01" required>
-    </div>
-    <div class="form-group">
-      <label for="select-option">Choose an option:</label>
-      <select name="select-option" id="select-option">
-        <option value="option-1">Draft</option>
-        <option value="option-2">Public</option>
-      </select>
-    </div>
-    <br>
-    {% bootstrap_button "Add Product" type="submit" %}
-  </form>
-</div>
- -->

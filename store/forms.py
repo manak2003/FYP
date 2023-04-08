@@ -24,6 +24,7 @@ class OrderForm(forms.Form):
     
 class ProductForm(forms.Form):
     title = forms.CharField(max_length=100)
+    image = forms.ImageField()
     short_description = forms.CharField(max_length=150, help_text='Describe the product')
     quantity = forms.IntegerField()
     category = forms.ModelChoiceField(queryset=Category.objects.all(), empty_label='Select Category')
@@ -34,7 +35,7 @@ class ProductForm(forms.Form):
     
     class Meta:
         model = Product
-        fields = ('title','short_description','category','quantity','value','discount_value','final_value','status')
+        fields = ('title','image','short_description','category','quantity','value','discount_value','final_value','status')
         
 class OrderItemForm(forms.Form):
     product = forms.CharField(widget=forms.TextInput)

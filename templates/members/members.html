@@ -1,0 +1,34 @@
+{% extends 'layout/base.html' %}
+
+
+{% block content %}
+<body>
+    <h1>Subscribe</h1>
+    <form action="subscribe.php" method="post">
+      <br>
+      <p>Choose your subscription plan:</p>
+      <label for="basic">Basic - $5/month</label>
+        <a href="{% url 'subscribe' %}">Subscribe</a>
+      <br>
+      <label for="premium">Premium - $10/month</label>
+      
+      <a href="{% url 'subscribe' %}">Subscribe</a>
+      <br>
+      <label for="pro">Pro - $20/month</label>
+      
+      <a href="{% url 'subscribe' %}">Subscribe</a>
+      <br>
+      <input type="submit" value="Subscribe">
+    </form>
+  </body>
+{% endblock content %}
+    
+
+{% block css %}
+    
+{% endblock css %}
+
+
+{% block js %}
+    
+{% endblock js %}

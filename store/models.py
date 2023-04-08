@@ -22,6 +22,14 @@ class Category(models.Model):
     def __str__(self):
         return self.title
     
+class Image(models.Model):
+    image = models.ImageField(upload_to='product/images/')
+    caption = models.CharField(max_length=100, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)    
+
+    def __str__(self):
+        return self.image.url
+    
 class Order(models.Model):
     date = models.DateField(auto_now_add=True)
     title = models.CharField(blank=True, max_length=100)
@@ -81,6 +89,7 @@ class Product(models.Model):
         PUBLIC = 1, 'Public'
     status = models.IntegerField(choices=StatusChoice.choices, default=StatusChoice.DRAFT)
     title = models.CharField(max_length=100)
+    image = models.ForeignKey(Image, blank=True, null=True,on_delete=models.SET_NULL)
     short_description = models.CharField(max_length=100)
     slug = models.URLField(max_length=100)
     category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL)
@@ -90,7 +99,7 @@ class Product(models.Model):
     value = models.DecimalField(default=0.00, decimal_places=2, max_digits=10)
     discount_value = models.DecimalField(default=0.00, decimal_places=2, max_digits=10)
     final_value = models.DecimalField(default=0.00, decimal_places=2, max_digits=10)
-    qty = models.PositiveIntegerField(default=0)
+    quantity = models.PositiveIntegerField(default=0)
     
     
     objects = models.Manager()
@@ -156,13 +165,7 @@ def delete_order_item(sender, instance, **kwargs):
     product.qty += instance.qty
     product.save()
    
-class Image(models.Model):
-    image = models.ImageField(upload_to='articles/images/')
-    caption = models.CharField(max_length=100, blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)    
 
-    def __str__(self):
-        return self.image.url
     
 class Delivery(models.Model):
     title = models.CharField(max_length=100,default='Delivery')

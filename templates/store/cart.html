@@ -13,11 +13,11 @@
             </tr>
         </thead>
         <tbody>
-            {% for cart_item in cart_items %}
+            {% for cart.id in add %}
                 <tr>
-                    <td>{{ cart_item.product.name }}</td>
-                    <td>{{ cart_item.quantity }}</td>
-                    <td>{{ cart_item.product.price }}</td>
+                    <td>{{ cart.id.product.title }}</td>
+                    <td>{{ cart.id.product.quantity }}</td>
+                    <td>{{ cart.id.product.value }}</td>
                     
                     <td>
                         <form action="{% url 'remove_from_cart' cart_item.id %}" method="post">
@@ -136,3 +136,8 @@
 </style>
 {% endblock css %}
     
+
+{% block js %}
+  
+{% endblock js %}
+  

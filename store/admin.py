@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Product, Order, OrderItem,Image,Delivery,Settings
+from .models import Category, Product, Order, OrderItem,Image,Delivery,Settings, CartItem, Cart
 
 # Register your models here.
 
@@ -10,12 +10,12 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['title','status','active','created_at','last_modified','category', 'tag_final_value', 'qty']
+    list_display = ['title','image','status','active','created_at','last_modified','category', 'tag_final_value', 'quantity']
     list_select_related = ['category']
     list_filter = ['active', 'category','status']
     search_fields = ['title','product_name']
     list_per_page = 50
-    fields = ['active', 'title', 'status','category', 'qty', 'value', 'discount_value', 'tag_final_value']
+    fields = ['active', 'title','image', 'status','category', 'quantity', 'value', 'discount_value', 'tag_final_value']
     autocomplete_fields = ['category']
     readonly_fields = ['tag_final_value']
     
@@ -60,4 +60,18 @@ class SettingsAdmin(admin.ModelAdmin):
     list_filter = ('title','email','phone','address')
     search_fields = ('title','email','phone','address')
     
+@admin.register(Cart)
+class CartAdmin(admin.ModelAdmin):
+    '''Admin View for Cart'''
+
+    list_display = ('user','total')
+  
+  
+@admin.register(CartItem)
+class Admin(admin.ModelAdmin):
+    '''Admin View for '''
+
+    list_display = ('cart','product','quantity')
+  
+
     

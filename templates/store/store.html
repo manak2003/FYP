@@ -15,6 +15,21 @@
   crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
   <style>
+    .clean-link {
+      color: inherit;
+      text-decoration: none;
+    }
+    
+    .clean-link:hover {
+      text-decoration: none;
+      color: #733939;
+    }
+    .rupees::before {
+      content: "₹";
+      font-size: 0.8em;
+      vertical-align: top;
+      padding-right: 2px;
+    }
     body {
       margin: 0;
       padding: 0;
@@ -107,12 +122,62 @@
 </header>
 {% bootstrap_messages %}
 <main>
+  {% block content %}
   
-  {% block content %}{% endblock %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Store</h1>
+        {% for item in data %}
+          <div class="card" style="width: 18rem;">
+          <a href="#" class="clean-link">
+            <img src="{{item.image}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{item.title}}</h5>
+              <p class="card-text">{{item.short_description}}</p>
+              <p class="card-text rupees">{{item.final_value}}</p>
+              <p class="card-text rupees"><s>{{item.value}}</s></p>
+              <button id="add-to-cart" data-product-id="{{product.id}}"><a href="{% url 'cart' %}">Add to cart</a></button>
+              <a href="{% url 'cart' %}" class="btn btn-primary my-2">Buy now</a>
+          </a>
+              
+
+              
+             
+            </div>
+          </div>
+        {% endfor %}
+        
+      </div>
+    </div>
+  </div>{% endblock %}
 </main>
 {% bootstrap_javascript %}
 
-{% block js %}{% endblock %}
+{% block js %}
+<script>
+  const addToCartBtn = document.querySelector('#add-to-cart');
+
+addToCartBtn.addEventListener('click', () => {
+  const productId = addToCartBtn.dataset.productId;
+  
+  fetch(`/cart/add/${productId}/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': '{{ csrf_token }}'
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    document.querySelector('#cart-count').textContent = data.cart_count;
+  })
+  .catch(error => {
+    // Handle error
+  });
+});
+</script>
+{% endblock %}
 </body>
 </html>
 

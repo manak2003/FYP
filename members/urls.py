@@ -1,7 +1,9 @@
 from django.urls import path
 from . import views
 
-app_name = 'members'
+
 urlpatterns = [
-       path('memberships/', views.MembershipSelectView.as_view(), name='membership_list'),
+       path('subscribe/', views.Subscription, name='subscribe'),
+       path('members/', views.members_view, name='members'),
+       
 ]

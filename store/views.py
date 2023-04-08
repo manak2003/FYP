@@ -5,12 +5,15 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.conf import settings
 from .models import *
+from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
 # Create your views here. 
 
 
 def StorePage(request):
-    return render(request,"store/store.html")
+    data = Product.objects.all()
+    return render(request,"store/store.html",{'data': data})
 
 def add_order(request):
     form = OrderForm(request.POST or None)
@@ -30,23 +33,29 @@ def add_order(request):
     }
     return render(request,"store/order.html",ctx)
 
-def ProductPage(request):
+def add_product(request):
     form = ProductForm(request.POST or None)
     if form.is_valid():
         title = form.cleaned_data.get('title')
+        image = Image.objects.create(image=request.FILES['image'])
         short_description = form.cleaned_data.get('short_description')
-        qty = form.cleaned_data.get('qty')
+        quantity = form.cleaned_data.get('quantity')
         category = form.cleaned_data.get('category')
         value = form.cleaned_data.get('value')
         discount_value = form.cleaned_data.get('discount_value')
         final_value = form.cleaned_data.get('final_value')
         status = form.cleaned_data.get('status')
         
-        product = Product(title=title,short_description=short_description,qty =qty,category=category,value=value,discount_value=discount_value,final_value=final_value, status=status)
+        product = Product(title=title,image=image,short_description=short_description,quantity=quantity,category=category,value=value,discount_value=discount_value,final_value=final_value, status=status)
         product.save()
         
+        messages.success(request, 'Product added successfully')
+        return redirect('store')
+        
+        
+        
     ctx = {
-        'title':'OrderPage',
+        'title':'ProductPage',
         'form': form
     }
     return render(request,"store/product.html",ctx)
@@ -90,42 +99,27 @@ def DeliveryPage(request):
     return render(request,"store/delivery.html",ctx)
 
 def SettingsPage(request):
-    form = SettingsForm(request.POST or None)
-    if form.is_valid():
-        title = form.cleaned_data.get('title')
-        logo = form.cleaned_data.get('logo')
-        phone = form.cleaned_data.get('phone')
-        email = form.cleaned_data.get('email')
-        address = form.cleaned_data.get('address')
-        currency = form.cleaned_data.get('currency')
-        created_at = form.cleaned_data.get('created_at')
-        last_modified = form.cleaned_data.get('last_modified')
-        
-        settings = Settings(title=title,logo=logo,phone=phone,email=email,address=address,currency=currency,created_at=created_at,last_modified=last_modified)
-        settings.save()
-        
-    ctx = {
-        'title':'SettingsPage',
-        'form' : form
-    }
-    return render(request,"store/settings.html",ctx)
+    return render(request,"store/settings.html")
 
 @login_required
 def add_to_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     cart, created = Cart.objects.get_or_create(user=request.user)
     
-    cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
+    cart_item, created = CartItem.objects.get_or_create(cart=request.session.get('cart_id'), product=product)
+    
 
     if not created:
         cart_item.quantity += 1
         cart_item.save()
+        
+    if 'cart_id' not in request.session:
+        request.session['cart_id'] = cart.id
+        
+    cart_count = CartItem.objects.filter(cart=request.session.get('cart_id')).count()
+    return JsonResponse({'cart_count': cart_count})
 
-    cart.items.add(product)
-    cart.total += product.price
-    cart.save()
 
-    return redirect('cart')
 
 @login_required
 def remove_from_cart(request, cart_item_id):
@@ -137,7 +131,7 @@ def remove_from_cart(request, cart_item_id):
     cart.total -= product.price
     cart.save()
 
-    return redirect('cart')
+    return redirect('add_to_cart')
 
 @login_required
 def view_cart(request):
