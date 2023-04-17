@@ -5,6 +5,7 @@ from django.db import models
 
 class EventCategory(models.Model):
     name = models.CharField(max_length=100)
+    description = models.TextField(default=True)
     code = models.CharField(max_length=100)
     image = models.ImageField(upload_to='event_category', blank=True, null=True)
     priority = models.IntegerField(default=0)
@@ -20,6 +21,7 @@ class EventCategory(models.Model):
 class Event(models.Model):
     category = models.ForeignKey(EventCategory, on_delete=models.CASCADE, related_name='event_category')
     name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='event', blank=True, null=True)
     uid = models.PositiveIntegerField(unique=True)
     description = models.TextField()
     select_schedule_status = (('yet to scheduled', 'Yet to Scheduled'), ('scheduled', 'Scheduled'))
@@ -38,13 +40,7 @@ class Event(models.Model):
     def __str__(self):
         return self.name
 
-    
-class EventImage(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='event_image')
-    image = models.ImageField(upload_to='event_image', blank=True, null=True)
-    
-    def __str__(self):
-        return self.event.name
+
      
 class EventMember(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='event_member')

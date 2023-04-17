@@ -11,6 +11,10 @@ urlpatterns = [
     path('home/',home_view, name ='home'),
     path('forget_password/', views.ForgetPassword, name ='forget_password'),
     path('change_password/<str:token>/', views.ChangePassword, name ='change_password'),
+    path('accounts/',views.accounts, name ='accounts'),
+    path('organization/',views.organization, name ='organization'),
+    
+    
     
    
     

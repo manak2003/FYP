@@ -1,5 +1,5 @@
 from django.shortcuts import redirect,render
-from .forms import LoginForm,RegisterForm,ForgetPasswordForm
+from .forms import LoginForm,RegisterForm,ForgetPasswordForm,OrganizationForm
 from django.contrib.auth.decorators import  login_required
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
@@ -32,7 +32,7 @@ def login_view(request):
             login(request, user)
             # request.session['is_user'] = True
             messages.success(request, 'Login Successful')
-            return redirect("home")
+            return redirect("accounts")
         else:
             messages.error(request,'Wrong Credentials')   
     ctx = {'form': form,'title':'Login'} 
@@ -122,3 +122,22 @@ def ChangePassword(request, token ):
     except Exception as e:
         print(e)
     return render(request, 'Authes/change_password.html', context)
+
+def accounts(request):
+    return render(request, 'Authes/accounts.html')
+
+def organization(request):
+    form = OrganizationForm(request.POST or None)
+    if form.is_valid():
+        
+        organization_name = form.cleaned_data.get('organization')
+        organization = Organization.objects.create(organization_name=organization_name)
+        
+        organization.save()
+        
+        form.save()
+        return redirect('organization')
+    
+    
+    context = {'form':form}
+    return render(request, 'Authes/organization.html', context)

@@ -5,3 +5,6 @@ from .models import Transaction
 def transaction_list(request):
     transactions = Transaction.objects.all()
     return render(request, 'finances/transaction_list.html', {'transactions': transactions})
+
+def financial(request):
+    return render(request, 'finances/financial.html', {})

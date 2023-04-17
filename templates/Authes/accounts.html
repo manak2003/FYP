@@ -1,0 +1,37 @@
+{% extends 'layout/base.html' %}
+
+
+{% block content %}
+
+<section class="hero is-primary is-fullheight">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">Welcome to my Website</h1>
+        <h2 class="subtitle">This is the first thing visitors will see.</h2>
+        <a href="{% url 'organization' %}">Organization</a>
+      </div>
+    </div>
+    <div class="container mt-4">
+        <button class="btn btn-dark" >
+                Add <span class="badge bg-primary">Administrator</span>
+        </button>
+        <button class="btn btn-dark" >
+                Add <span class="badge bg-primary">Member</span>
+        </button>
+        <button class="btn btn-dark" >
+                Create <span class="badge bg-primary">Event</span>
+        </button>
+    </div>
+  </section>
+{% endblock content %}
+    
+
+{% block css %}
+    
+{% endblock css %}
+    
+
+{% block js %}
+    
+{% endblock js %}
+    

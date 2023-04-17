@@ -3,19 +3,89 @@
 
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <h1 class="display-1">{{event.name}}</h1>
-            <p class="lead">{{event.description}}</p>
-        </div>
-    </div>
-</div>
+
     
+  <h1>Upcoming Events</h1>
+  <main>
+    {% for item in data %}
+    <div class="event">
+      <img class="card-img-top" src="{{item.image.url}}" alt="Card image cap">
+      <div class="card-body">
+        <h4 class="card-title">{{item.name}}</h4>
+        <p class="card-text">{{item.start_date}}</p>
+        <p class="card-text">{{item.venue}}</p>
+        <p class="card-text">{{item.description}}</p>
+        <a name="" id="" class="btn btn-light" href="#" role="button">Book</a>
+      </div>
+    </div>
+   
+    
+    {% endfor %}
+            
+   
+  </main>
+  
+
 {% endblock content %}
     
 
 {% block css %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      header {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+      }
+      main {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 20px;
+      }
+      .event {
+        border: 1px solid #ccc;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        margin: 10px;
+        padding: 10px;
+        width: 350px;
+      }
+      .event h2 {
+        margin-top: 0;
+      }
+      .event p {
+        margin: 10px 0;
+      }
+      .event a {
+        background-color: #333;
+        border: none;
+        color: #fff;
+        padding: 8px 12px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+      }
+      /* CSS for responsive design */
+      @media (max-width: 600px) {
+        .event {
+          width: 100%;
+        }
+      }
+
+      .event img{
+        width: 330px;
+        height: 300px;
+
+      }
+</style>
     
 {% endblock css %}
     

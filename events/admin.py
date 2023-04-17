@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Event , EventCategory, EventImage, EventMember
+from .models import Event , EventCategory,  EventMember
 
 # Register your models here.
 @admin.register(Event)
