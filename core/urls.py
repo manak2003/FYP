@@ -27,7 +27,6 @@ urlpatterns = [
     path('Authes/', include('Authes.urls')),
     path('store/', include('store.urls')),
     path('events/', include('events.urls')),
-    path('finances/', include('finances.urls')),
     path('members/', include('members.urls')),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('login/', views.login_view, name='login'),

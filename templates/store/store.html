@@ -1,135 +1,18 @@
+{% extends 'layout/base.html' %}
+
 {% load django_bootstrap5 %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  {% block css %}{% endblock %}
-  <title>{{title}}</title>
-  {% bootstrap_css %}
-  <link rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css"
-  integrity="sha512-5PV92qsds/16vyYIJo3T/As4m2d8b6oWYfoqV+vtizRB6KhF1F9kYzWzQmsO6T3z3QG2Xdhrx7FQ+5R1LiQdUA=="
-  crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-  <style>
-    .clean-link {
-      color: inherit;
-      text-decoration: none;
-    }
-    
-    .clean-link:hover {
-      text-decoration: none;
-      color: #733939;
-    }
-    .rupees::before {
-      content: "₹";
-      font-size: 0.8em;
-      vertical-align: top;
-      padding-right: 2px;
-    }
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
-  
-    nav {
-      background-color: #333;
-      color: #fff;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px;
-    }
-  
-    nav ul {
-      list-style: none;
-      display: flex;
-      margin: 0;
-      padding: 0;
-    }
-  
-    nav ul li {
-      margin: 0 10px;
-    }
-  
-    nav ul li a {
-      color: #fff;
-      text-decoration: none;
-      padding: 10px;
-      border-radius: 5px;
-      transition: all 0.3s ease-in-out;
-    }
-  
-    nav ul li a:hover {
-      background-color: #fff;
-      color: #333;
-    }
-  
-    nav h4 a {
-      color: #fff;
-      text-decoration: none;
-      padding: 10px;
-      border-radius: 5px;
-      transition: all 0.3s ease-in-out;
-    }
-  
-    nav h4 a:hover {
-      background-color: #fff;
-      color: #333;
-    }
-  
-    nav input[type="search"] {
-      padding: 5px 10px;
-      border-radius: 5px;
-      border: none;
-      margin-right: 10px;
-      width: 250px;
-    }
-  
-    nav button {
-      background-color: #fff;
-      color: #333;
-      border: none;
-      padding: 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: all 0.3s ease-in-out;
-    }
-  
-    nav button:hover {
-      background-color: #333;
-      color: #fff;
-    }
-  </style>	
-</head>
 <body>
-  <header>
-  <nav>
-		<h4><a href="/" class="active">Membership App</a></h4>
-		<ul>
-			<li><a href="{% url 'order' %}">Order</a></li>
-			<li><a href="{% url 'product' %}">Products</a></li>
-			<li><a href="{% url 'delivery' %}">Delivery</a></li>
-			<li><a href="{% url 'settings' %}">Settings</a></li>
-			<li><input type="search" placeholder="Search"></li>
-			<li><a href="{% url 'cart' %}"><i class="fa-solid fa-cart-shopping"></i> Cart</a></li>
-		</ul>
-	</nav>
-</header>
-{% bootstrap_messages %}
-<main>
+
   {% block content %}
+
   
-  <div class="container">
+   <div class="container">
     <div class="row">
-      <div class="col-md-12">
-        <h1>Store</h1>
+      <h1 class="store">Store</h1>
+      <div class="col-md-12" id="colmn">
         {% for item in data %}
-          <div class="card" style="width: 18rem;">
+          <div class="card" style="width: 18rem;" id="cd">
           <a href="#" class="clean-link">
             <img src="{{item.image}}" class="card-img-top" alt="...">
             <div class="card-body">
@@ -138,20 +21,63 @@
               <p class="card-text rupees">{{item.final_value}}</p>
               <p class="card-text rupees"><s>{{item.value}}</s></p>
               <button id="add-to-cart" data-product-id="{{product.id}}"><a href="{% url 'cart' %}">Add to cart</a></button>
-              <a href="{% url 'cart' %}" class="btn btn-primary my-2">Buy now</a>
-          </a>
-              
-
-              
-             
-            </div>
+              <button><a href="{% url 'cart' %}">Buy now</a></button>
+              </div>
+          </a> 
           </div>
-        {% endfor %}
-        
-      </div>
-    </div>
-  </div>{% endblock %}
-</main>
+          {% endfor %}
+          </div>
+            </div>
+    </div> 
+  
+  {% endblock content %}
+  {% block css %}
+    <style>
+  
+      #colmn{
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        margin: 10px;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+    }
+      #colmn:hover a{
+        color: #000000;
+      }
+      #cd{
+        margin-top: 10px;
+      }
+.card h5{
+  text-decoration: none;
+  font-weight: 600;
+  color: #000000;
+}
+.card p{
+  text-decoration: none;
+  font-weight: 600;
+  color: #000000;
+}
+.card a{
+  text-decoration: none;
+  font-weight: 600;
+  color: #000000;
+}
+.store{
+  text-align: center;
+  margin-top: 3%;
+  text-decoration: underline;
+  font-style: italic;
+}
+
+.card-text.rupees::before {
+  content: "\20B9"; /* Indian Rupee symbol */
+  display: inline-block;  
+}
+
+    </style>
+  {% endblock css %}
+    
 {% bootstrap_javascript %}
 
 {% block js %}
@@ -178,6 +104,10 @@ addToCartBtn.addEventListener('click', () => {
 });
 </script>
 {% endblock %}
+
+
+
+
 </body>
 </html>
 

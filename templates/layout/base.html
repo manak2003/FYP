@@ -17,7 +17,9 @@
     <style>
         .navbar {
             overflow: hidden;
-            background-color: #333;
+            background: #FFEFBA;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #FFFFFF, #FFEFBA);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #FFFFFF, #FFEFBA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
             font-family: Arial, sans-serif;
             position: relative;
             z-index: 1;
@@ -27,9 +29,10 @@
           .navbar a {
             float: left;
             display: block;
-            color: #f2f2f2;
+            color: #ec3b38;
+            font-weight: 700;
             text-align: center;
-            padding: 14px 16px;
+            padding: 8px 10px;
             text-decoration: none;
             font-size: 17px;
             transition: all 0.3s ease-in-out;
@@ -43,7 +46,7 @@
       
           /* Active/current link */
           .active {
-            background-color: #4c54af;
+            background-color: #bea5c7b5;
             color: white;
           }
       
@@ -51,59 +54,11 @@
           .navbar .icon {
             display: none;
           }
-      
-          /* Style the dropdown menu */
-          .dropdown {
-            float: left;
-            overflow: hidden;
-          }
-      
-          /* Dropdown button */
-          .dropdown .dropbtn {
-            font-size: 17px;    
-            border: none;
-            outline: none;
-            color: white;
-            padding: 14px 16px;
-            background-color: inherit;
-            font-family: inherit;
-            margin: 0;
-          }
-      
           /* Add a red background color to navbar dropdown links on hover */
           .navbar a:hover, .dropdown:hover .dropbtn {
-            background-color: #ddd;
+            background-color: #f0ebeb55;
+            border-radius: 2rem;
             color: black;
-          }
-      
-          /* Dropdown content (hidden by default) */
-          .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-          }
-      
-          /* Links inside the dropdown */
-          .dropdown-content a {
-            float: none;
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-          }
-      
-          /* Add a grey background color to dropdown links on hover */
-          .dropdown-content a:hover {
-            background-color: #ddd;
-          }
-      
-          /* Show the dropdown menu on hover */
-          .dropdown:hover .dropdown-content {
-            display: block;
           }
       
           /* Responsive layout - makes the navbar menu and hamburger menu dropdown on small screens */
@@ -149,10 +104,9 @@
 <body>
     <header>
 <div class="navbar" id="myNavbar">
-    <a href="/" class="active">Membership App</a>
+    <a href="/" class="active"><strong>Member Hub</strong></a>
     <a href="{% url 'events' %}">Events</a>
     <a href="{% url 'members' %}">Members</a>
-    <a href="#">Finances</a>
     <a href="{% url 'store' %}">Store</a>
 
     {% if user.is_authenticated %}
@@ -204,8 +158,10 @@
 <main>
     {% block content %}{% endblock %}
 </main>
+
 {% bootstrap_javascript %}
 {% block js %}{% endblock %}
+
 </body>
 
 

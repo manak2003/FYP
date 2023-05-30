@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Authes',
     'events',
-    'finances',
     'landing',
     'members',
     'store',
@@ -170,3 +169,5 @@ TINYMCE_DEFAULT_CONFIG = {
 
 
 
+import sys
+sys.path.append('/path/to/finances/module')

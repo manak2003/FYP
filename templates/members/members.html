@@ -1,34 +1,132 @@
 {% extends 'layout/base.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% block css %}{% endblock %}
+  <title>{{title}}</title>
+  {% bootstrap_css %}
+  <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css"
+  integrity="sha512-5PV92qsds/16vyYIJo3T/As4m2d8b6oWYfoqV+vtizRB6KhF1F9kYzWzQmsO6T3z3QG2Xdhrx7FQ+5R1LiQdUA=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+<style>
+  /* Create three columns of equal width */
+.columns {
+  float: left;
+  width: 33.3%;
+  padding: 8px;
+}
 
+/* Style the list */
+.price {
+  list-style-type: none;
+  border: 1px solid #eee;
+  margin: 0;
+  padding: 0;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
 
-{% block content %}
+/* Add shadows on hover */
+.price:hover {
+  box-shadow: 0 8px 12px 0 rgba(0,0,0,0.2)
+}
+
+/* Pricing header */
+.price .header {
+  background-color: #111;
+  color: white;
+  font-size: 25px;
+}
+
+/* List items */
+.price li {
+  border-bottom: 1px solid #eee;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Grey list item */
+.price .grey {
+  background-color: #eee;
+  font-size: 20px;
+}
+
+/* The "Sign Up" button */
+.button {
+  background-color: #04AA6D;
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+/* Change the width of the three columns to 100%
+(to stack horizontally on small screens) */
+@media only screen and (max-width: 600px) {
+  .columns {
+    width: 100%;
+  }
+}
+</style>
+</head>
 <body>
-    <h1>Subscribe</h1>
-    <form action="subscribe.php" method="post">
-      <br>
-      <p>Choose your subscription plan:</p>
-      <label for="basic">Basic - $5/month</label>
-        <a href="{% url 'subscribe' %}">Subscribe</a>
-      <br>
-      <label for="premium">Premium - $10/month</label>
-      
-      <a href="{% url 'subscribe' %}">Subscribe</a>
-      <br>
-      <label for="pro">Pro - $20/month</label>
-      
-      <a href="{% url 'subscribe' %}">Subscribe</a>
-      <br>
-      <input type="submit" value="Subscribe">
-    </form>
-  </body>
-{% endblock content %}
-    
-
-{% block css %}
-    
-{% endblock css %}
-
+  <div class="columns">
+    <ul class="price">
+      <li class="header">Basic</li>
+      <li class="grey">$ 9.99 / year</li>
+      <li>10GB Storage</li>
+      <li>10 Emails</li>
+      <li>10 Domains</li>
+      <li>1GB Bandwidth</li>
+      <li class="grey"><a href="#" class="button">Sign Up</a></li>
+    </ul>
+  </div>
+  
+{% bootstrap_messages %}
+<main style="margin-left: 14rem;">
+  {% block content %}{% endblock %}
+</main>
+{% bootstrap_javascript %}
 
 {% block js %}
-    
-{% endblock js %}
+<script>
+    // Get all the navbar links with dropdowns
+const navbarLinks = document.querySelectorAll('.with-dropdown .nav-link');
+
+// Add event listeners to the links
+navbarLinks.forEach(link => {
+  link.addEventListener('click', event => {
+    // Prevent the link from navigating to a new page
+    event.preventDefault();
+    // Toggle the dropdown menu visibility
+    const dropdownMenu = link.nextElementSibling;
+    dropdownMenu.classList.toggle('show');
+  });
+});
+
+// Hide dropdown menus when the user clicks outside of them
+window.addEventListener('click', event => {
+  navbarLinks.forEach(link => {
+    const dropdownMenu = link.nextElementSibling;
+    if (event.target !== link && event.target !== dropdownMenu) {
+      dropdownMenu.classList.remove('show');
+    }
+  });
+});
+
+  </script> 
+
+{% endblock %}
+  
+</body>
+</html>
+

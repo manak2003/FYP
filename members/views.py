@@ -7,4 +7,8 @@ def Subscription(request):
     return render(request, 'members/subscribe.html')
 
 def members_view(request):
+        
     return render(request, 'members/members.html')
+
+def mhome_view(request):
+    return render(request, 'members/mhome.html')

@@ -4,26 +4,38 @@
 
 {% block content %}
 
-    
-  <h1>Upcoming Events</h1>
-  <main>
-    {% for item in data %}
-    <div class="event">
-      <img class="card-img-top" src="{{item.image.url}}" alt="Card image cap">
-      <div class="card-body">
-        <h4 class="card-title">{{item.name}}</h4>
-        <p class="card-text">{{item.start_date}}</p>
-        <p class="card-text">{{item.venue}}</p>
-        <p class="card-text">{{item.description}}</p>
-        <a name="" id="" class="btn btn-light" href="#" role="button">Book</a>
-      </div>
+
+
+    <div class="container-fluid" id="banner">
+      <h1 class="text-1">E V E N T S</h1>
+      <h2 class="text-1">"Embark on a Journey of Unforgettable Experiences: Discover, Book, and Attend the Hottest Events in Town!"</h2>
+      <br>
+      <button class="tc">Get a Ticket ></button>
+      <br>
+      <p></p>
     </div>
-   
-    
-    {% endfor %}
-            
-   
-  </main>
+
+
+
+<div class="E2-cont container ">
+  <h1 class="headingg">Upcoming Events </h1>
+    <table>
+      {% for item in data %}
+     
+      <tr>
+        <td class="date">{{item.start_date}} </td>
+        <td class="image">        <img src="{{item.image.url}}" alt="Card image cap"></td>
+        <td class="name">{{item.name}}</td>
+        <td class="disc">{{item.description}} <br> <br> <br><a class="link" href="">view details</a><hr> </td>
+        <td class="venu">{{item.venue}}</td>
+       
+      </tr>
+      {% endfor %}
+      
+    </table>
+  </div>
+
+
   
 
 {% endblock content %}
@@ -31,22 +43,109 @@
 
 {% block css %}
 <style>
+.hori{
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.venu{
+  font-weight: 700
+}
+
+.link{
+  text-decoration: none;
+  font-weight: 600;
+  color: #000000;
+}
+
+.headingg{
+  text-align: center;
+  margin-bottom: 80px;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.E2-cont {
+margin-top: 100px;
+
+}
+.name{
+
+  font-size: larger;
+    font-weight: 700;
+    color: #565656;
+}
+
+  .date {
+    font-size: medium;
+    font-weight: 800;
+    color: #565656;
+  }
+
+  img, svg {
+    vertical-align: middle;
+    width: 2326px;}
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: 10px;
+    text-align: left;
+    vertical-align: top;
+    border: 1px solid #ddd;
+  }
+
+  img {
+    max-width: 100%;
+   
+  }
+  .E-text{
+    font-weight: 900;
+    font-size: xx-large;
+    margin-bottom: 15px;
+  }
+
+.fest{
+  text-align: center;
+  font-size: xx-large;
+  background-color: plum;
+  color: #fff;
+  font-weight: 700;
+  margin-top:5%;
+}
+
+
+  .text-1{
+    color: #fff;
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+  .tc{
+    padding: revert;
+    margin-left: 47%;
+    font-size: larger;
+  }
+  #banner{
+    background: #000000;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #434343, #000000);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
     body {
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
       }
-      header {
-        background-color: #333;
-        color: #fff;
-        padding: 10px;
-        text-align: center;
-      }
       main {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
-        padding: 20px;
+        
       }
       .event {
         border: 1px solid #ccc;
@@ -85,6 +184,39 @@
         height: 300px;
 
       }
+
+
+      .container-eve {
+        display: flex;
+        flex-direction: row;
+        height: 100vh;
+        width: 100%;
+      }
+
+      /* Sidebar navigation menu */
+      .sidebar {
+        height: 100%;
+        width: 200px;
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+      }
+
+      /* Sidebar navigation menu links */
+      .sidebar a {
+        color: #fff;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 10px;
+      }
+      .container-main{
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        margin: 1.6em;
+      }
+
+
 </style>
     
 {% endblock css %}
